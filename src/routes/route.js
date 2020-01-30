@@ -1,8 +1,9 @@
+const gitController = require('../controllers/gitController')
+
 module.exports = (app) => {
    
-    const gitController = require('../controllers/gitController')
         
     app.route('/api/curriculo')
-    .get(gitController)
+    .get(gitController.get)
 
 }
