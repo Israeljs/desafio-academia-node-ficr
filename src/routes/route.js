@@ -1,4 +1,4 @@
-const gitController = require('../controllers/gitController')
+const gitController = require('../controllers/controller')
 
 module.exports = (app) => {
    
