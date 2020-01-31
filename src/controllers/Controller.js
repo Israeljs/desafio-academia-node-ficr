@@ -1,14 +1,13 @@
 const _ = require('lodash')
 const urlBaseG = require('../services/githubService')
 const urlBaseF = require("../services/facebookService")
-require("dotenv").config();
 
+
+const repositories = []
+const profile = []
 
 module.exports = {
   async get(req, res) {
-    
-    const repositories = []
-    const profile = []
 
     try {
       const face = await urlBaseF.get(`me?fields=id%2Cname%2Caddress%2Cbirthday%2Cemail%2Cgender%2Cfirst_name%2Clast_name%2Clocation&access_token=${process.env.FACE_TOKEN}`);
@@ -46,9 +45,7 @@ module.exports = {
 
     const repoArr = _.chunk(repositories, 3)
 
-    profile = faceData
-
-    return res.json({ facebook_profile:[profile],
+    return res.json({ facebook_profile:[faceData],
       github_profile: {
       name: data.name,
       url: data.url,
