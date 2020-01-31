@@ -1,9 +1,9 @@
-const Controller = require('../controllers/Controller')
+const Control = require('../controllers/Control')
 
 module.exports = (app) => {
    
         
     app.route('/api/curriculo')
-    .get(Controller.get)
+    .get(Control.get)
 
 }
