@@ -9,15 +9,3 @@ const urlBase = axios.create({
 
 module.exports = urlBase
 
-
-
-
-/*class UrlGithub {
-    constructor(baseURL, useName) {
-        this = baseURL
-        this = useName
-    }
-    get() {
-        url = `https://api.github.com/users/${useName}`
-        return 
-    }*/

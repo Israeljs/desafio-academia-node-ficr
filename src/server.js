@@ -1,6 +1,6 @@
 const app = require("express")();
 const bodyParser = require("body-parser");
-const door = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -9,6 +9,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 var routes = require("./routes/route.js");
 routes(app);
 
-app.listen(door, () => {
-  console.log(`Server is running on door ${door}!`);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}!`);
 });
