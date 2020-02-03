@@ -1,23 +1,35 @@
 const _ = require('lodash')
-const urlBaseG = require('../services/githubService')
-const urlBaseF = require("../services/facebookService")
+//const {baseURLF} = require('../services/axiosService')
+const baseURLG = require('../services/githubService')
+const baseURLF = require("../services/facebookService")
+//require('dotenv').config();
 
 
 const repositories = []
-const profile = []
+//const profile = []
 
 module.exports = {
   async get(req, res) {
 
     try {
-      const face = await urlBaseF.get("me?fields=id%2Cname%2Caddress%2Cbirthday%2Ceducation%2Cemail%2Cfirst_name%2Cgender%2Cfavorite_athletes%2Cis_shared_login%2Cage_range%2Clocation%2Cmiddle_name&access_token=EAAIbgFzeGfcBAL3RMegAw2mAZAtbH6pa4M1LaVkCGBsqDM4joZAzkrZANg6nBiK6lsk3EtRgPZCVZA6Ef9zVWwTyZAxjs7eumM2s0zsFEF9k8nxj3ZANBviumQ1BKwaBC6UQ4mWEjngyYQM9RuZBFgg91T0T9pBFZBOYWqCxkOMR3OyuaSkXEzkwZAZBk66qZBIl0zl47NvFIkcEJwqnf2s3THg0zT6QE6ReGPiyzzNTbEwncgZDZD") //(`me?fields=id%2Cname%2Caddress%2Cbirthday%2Ceducation%2Cemail%2Cfirst_name%2Cgender%2Cfavorite_athletes%2Cis_shared_login%2Cage_range%2Clocation%2Cmiddle_name&access_token=${process.env.FACE_TOKEN}`);
+      const face = await baseURLF.get("https://graph.facebook.com/v5.0/me?fields=name%2Caddress%2Cbirthday%2Cemail%2Cfirst_name%2Cgender%2Clast_name&access_token=EAAIbgFzeGfcBAPEiZCrS7emPyGbexAoTBu62jZB0GNqZBTzDl2XwqdD10ZCZCwcHD1HSbmaBQU19sFFcqlq6u1WInZB7ea8qZAQAu8wgQJhmlvfVZBkaItNLAmUK80zMyYABbZAHNZC3locnpBFpQnZCZCCHdVTIXzqo8bE4mpHMlCqwPyrcYvZBjGktQnxMgWu0ZBU7u9orhqSr0nEcpJkbiv4ALwASxB2D4sqYsKvTxBPqj4IIrZAd0zk6FwHm1ZBeX2SeZCxAZD")   
 
-      const { name, last_name, birthday, gender, email  } = face.data;
+      const { name, adress, last_name, birthday, gender, email  } = face.data;
 
-      const faceData = { name, last_name, birthday, gender, email };
+      const faceData = { name, adress, last_name, birthday, gender, email };
 
 
-      const { data } = await urlBaseG.get('/israeljs', { Authorizathion: `token ${process.env.GIT_TOKEN}`}) 
+      const { data } = await baseURLG.get('/israeljs', { Authorizathion: "token 83d5b63c913f57e70265f8679b9935788889e431"}) 
+
+      /*{
+  "name": "Israel Jerônimo",
+  "birthday": "07/05/1980",
+  "email": "silvaij16@gmail.com",
+  "first_name": "Israel",
+  "gender": "male",
+  "last_name": "Jerônimo",
+  "id": "1685122708309134"
+}*/
 
     //   const gitData = {
     //     github_profile: {
@@ -29,7 +41,7 @@ module.exports = {
     // } 
 
 
-      const { data: repos } = await urlBaseG.get('/israeljs/repos')
+      const { data: repos } = await baseURLG.get('/israeljs/repos')
 
       repos.map(r => {
         repositories.push({
